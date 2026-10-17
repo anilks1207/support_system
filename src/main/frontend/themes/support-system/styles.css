@@ -1,0 +1,224 @@
+
+/* Support System — Shared Blue and White Theme */
+
+:root {
+    --support-primary: #2563eb;
+    --support-primary-dark: #1746a2;
+    --support-page-bg: #f5f8ff;
+    --support-card-bg: #ffffff;
+    --support-text: #172b4d;
+    --support-muted: #64748b;
+    --support-border: #e2e8f0;
+    --support-success: #15803d;
+    --support-warning: #b45309;
+
+    --lumo-primary-color: var(--support-primary);
+    --lumo-primary-color-50pct: rgba(37, 99, 235, 0.5);
+    --lumo-primary-color-10pct: rgba(37, 99, 235, 0.1);
+    --lumo-base-color: var(--support-card-bg);
+    --lumo-body-text-color: var(--support-text);
+    --lumo-secondary-text-color: var(--support-muted);
+    --lumo-contrast-10pct: var(--support-border);
+}
+
+/* Consistent page background and typography */
+html {
+    background: var(--support-page-bg);
+}
+
+body {
+    color: var(--support-text);
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+/* Consistent headings */
+h1, h2, h3 {
+    color: var(--support-text);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+/* Consistent buttons */
+vaadin-button {
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* Consistent input fields */
+vaadin-text-field,
+vaadin-text-area,
+vaadin-combo-box,
+vaadin-password-field,
+vaadin-select,
+vaadin-date-picker {
+    --vaadin-input-field-border-radius: 8px;
+}
+
+/* Consistent tables */
+vaadin-grid {
+    border: 1px solid var(--support-border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--support-card-bg);
+}
+
+/* Consistent navigation and links */
+a {
+    color: var(--support-primary);
+}
+
+a:hover {
+    color: var(--support-primary-dark);
+}
+
+
+
+   /* ===== Support System Layout Improvements ===== */
+
+   /* Page background and spacing */
+html,
+body {
+   background-color: #f5f8ff;
+   color: var(--support-text);
+}
+
+/* Consistent spacing for Vaadin content */
+vaadin-app-layout,
+vaadin-vertical-layout {
+    box-sizing: border-box;
+}
+
+/* Summary cards: prevent content from becoming excessively wide */
+.support-summary-cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Individual summary card */
+.support-summary-card {
+    min-width: 0;
+    box-sizing: border-box;
+    background: var(--support-card-bg);
+    border: 1px solid var(--support-border);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 2px 6px rgba(23, 43, 77, 0.06);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+/* Subtle hover effect */
+.support-summary-card:hover {
+    border-color: #c7d8f7;
+    box-shadow: 0 4px 12px rgba(23, 43, 77, 0.08);
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 800px) {
+    .support-summary-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .support-summary-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Cleaner ticket tables */
+vaadin-grid {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    --vaadin-grid-cell-background: #ffffff;
+    --vaadin-grid-cell-padding: 10px 12px;
+}
+
+/* Consistent button appearance */
+vaadin-button {
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* Consistent focus colour for form controls */
+vaadin-text-field,
+vaadin-text-area,
+vaadin-combo-box,
+vaadin-password-field,
+vaadin-select,
+vaadin-date-picker {
+    --vaadin-input-field-border-radius: 8px;
+    --vaadin-input-field-border-color: #cbd5e1;
+}
+
+/* Subtle hover effect for ticket rows */
+vaadin-grid::part(row):hover {
+    background-color: #f1f6ff;
+}
+
+
+/* ===== Shared page content styling ===== */
+
+.support-page-content {
+    box-sizing: border-box;
+    width: 100%;
+    color: var(--support-text);
+}
+
+/* Shared page headings */
+.support-page-content h2,
+.support-page-content h3 {
+    color: var(--support-text);
+}
+
+/* Shared white ticket tables */
+.support-page-content vaadin-grid {
+    width: 100%;
+    max-width: 100%;
+    background: #ffffff;
+    border: 1px solid var(--support-border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Shared white summary cards */
+.support-page-content .support-summary-card {
+    background: var(--support-card-bg);
+    border-color: var(--support-border);
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(23, 43, 77, 0.04);
+}
+
+
+/* ===== Ticket Summary Card Colors ===== */
+
+/* Total Tickets — dark blue */
+.support-card-total {
+    background: #1e40af !important;
+    border-color: #1e40af !important;
+    color: #ffffff !important;
+}
+
+/* Open — red */
+.support-card-open {
+    background: #fee2e2 !important;
+    border-color: #fecaca !important;
+    color: #991b1b !important;
+}
+
+/* In Progress — light blue */
+.support-card-inprogress {
+    background: #dbeafe !important;
+    border-color: #bfdbfe !important;
+    color: #1e40af !important;
+}
+
+/* Resolved — green */
+.support-card-resolved {
+    background: #dcfce7 !important;
+    border-color: #bbf7d0 !important;
+    color: #166534 !important;
+}
