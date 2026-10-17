@@ -6,7 +6,7 @@ spring:
     name: support-system
 
   datasource:
-    # Safely passes your clean variables over the IPv4 connection pooler on port 6543
+    # This matches the environment variables exactly and prevents hardcoded fallback errors
     url: jdbc:postgresql://${DB_HOST}:6543/${DB_NAME}?sslmode=require
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
