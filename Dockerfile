@@ -1,14 +1,30 @@
-# Use an official Java runtime as the base image
+## Use an official Java runtime as the base image
+#FROM eclipse-temurin:21-jdk-alpine
+#
+## Set the working directory inside the container
+#WORKDIR /app
+#
+## Copy the JAR file from your target folder into the container
+#COPY target/support-system-0.0.1-SNAPSHOT.jar app.jar
+#
+## Expose the port Render will map to (your command specifies 8085)
+#EXPOSE 8085
+#
+## Execute your exact command when the container starts
+#ENTRYPOINT ["java", "-Dspring.profiles.active=supabase", "-Dserver.port=8085", "-jar", "app.jar"]
+
 FROM eclipse-temurin:21-jdk-alpine
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the JAR file from your target folder into the container
+# Copy the precompiled JAR file from your tracked target folder
 COPY target/support-system-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose the port Render will map to (your command specifies 8085)
-EXPOSE 8085
+# Expose Render's internal routing port
+EXPOSE 8080
 
-# Execute your exact command when the container starts
-ENTRYPOINT ["java", "-Dspring.profiles.active=supabase", "-Dserver.port=8085", "-jar", "app.jar"]
+# Explicitly pass the active profile and override the JDBC URL straight into the runtime variables
+ENTRYPOINT ["sh", "-c", "java -Dspring.profiles.active=supabase -Dspring.datasource.url=\"$SPRING_DATASOURCE_URL\" -Dserver.port=${PORT:-8080} -jar app.jar"]
+git add Dockerfile
+git commit -m "Pass datasource url parameter dynamically in Docker entrypoint"
+git push
