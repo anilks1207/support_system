@@ -20,8 +20,8 @@ WORKDIR /app
 # Copy the precompiled JAR file from your tracked target folder
 COPY target/support-system-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose Render's internal routing port
+# Expose Render's routing port
 EXPOSE 8080
 
-# Explicitly pass the active profile and override the JDBC URL straight into the runtime variables
-ENTRYPOINT ["sh", "-c", "java -Dspring.profiles.active=supabase -Dspring.datasource.url=\"$SPRING_DATASOURCE_URL\" -Dserver.port=${PORT:-8080} -jar app.jar"]
+# Execute the application forcing the dynamic datasource parameters ahead of the yaml
+ENTRYPOINT ["sh", "-c", "java -Dspring.profiles.active=supabase -Dspring.datasource.url=\"$SPRING_DATASOURCE_URL\" -Dspring.datasource.username=\"$SPRING_DATASOURCE_USERNAME\" -Dserver.port=${PORT:-8080} -jar app.jar"]
