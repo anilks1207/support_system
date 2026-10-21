@@ -261,7 +261,7 @@ public class SupportDashboardView extends VerticalLayout {
                 label.getStyle().set("background-color", "#F1F5F9").set("color", "#64748B").set("border", "1px solid #E2E8F0");
             }
             return label;
-        }).setHeader("Unread Messages").setAutoWidth(true);
+        }).setHeader("Messages Status").setAutoWidth(true);
         grid.setItems(tickets);
         grid.setPageSize(15);
     }
