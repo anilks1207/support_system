@@ -130,13 +130,15 @@ public class MyTicketsView extends VerticalLayout {
         summaryCards.addClassName("support-summary-cards");
         summaryCards.setWidthFull();
 
+
         summaryCards.getStyle()
                 .set("display", "grid")
                 .set("grid-template-columns",
                         "repeat(4, minmax(0, 1fr))")
-                .set("gap", "12px")
+                .set("gap", "10px")
                 .set("align-items", "stretch")
-                .set("box-sizing", "border-box");
+                .set("box-sizing", "border-box")
+                .set("max-width", "100%");
 
         add(summaryCards);
 
@@ -210,7 +212,6 @@ public class MyTicketsView extends VerticalLayout {
 
             return unreadLabel;
         }).setHeader("Unread Messages").setAutoWidth(true);
-
         grid.addColumn(Ticket::getSubject)
                 .setHeader("Subject")
                 .setAutoWidth(true)
@@ -288,6 +289,7 @@ public class MyTicketsView extends VerticalLayout {
     }
 
     // Create an individual ticket summary card
+    // Create an individual ticket summary card
     private Div createSummaryCard(
             String label,
             long count,
@@ -298,13 +300,31 @@ public class MyTicketsView extends VerticalLayout {
         card.addClassNames("support-summary-card", colorClass);
         card.setWidthFull();
 
+        String backgroundColor = switch (colorClass) {
+            case "support-card-total" -> "#174EA6";
+            case "support-card-open" -> "#FEF2F2";
+            case "support-card-inprogress" -> "#EFF6FF";
+            case "support-card-resolved" -> "#F0FDF4";
+            default -> "#FFFFFF";
+        };
+
+        String borderColor = switch (colorClass) {
+            case "support-card-total" -> "#174EA6";
+            case "support-card-open" -> "#FECACA";
+            case "support-card-inprogress" -> "#BFDBFE";
+            case "support-card-resolved" -> "#BBF7D0";
+            default -> "#E2E8F0";
+        };
+
         card.getStyle()
-                .set("border", "1px solid transparent")
+                .set("background-color", backgroundColor)
+                .set("border", "1px solid " + borderColor)
                 .set("border-radius", "12px")
-                .set("padding", "18px")
+                .set("padding", "12px")
                 .set("box-sizing", "border-box")
                 .set("min-width", "0")
-                .set("overflow", "hidden");
+                .set("overflow", "hidden")
+                .set("box-shadow", "0 2px 6px rgba(23, 78, 166, 0.08)");
 
         Span labelText = new Span(label);
 
@@ -319,7 +339,7 @@ public class MyTicketsView extends VerticalLayout {
 
         countText.getStyle()
                 .set("color", textColor)
-                .set("font-size", "26px")
+                .set("font-size", "22px")
                 .set("margin", "8px 0 0 0");
 
         card.add(labelText, countText);

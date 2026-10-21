@@ -6,8 +6,8 @@ CREATE TABLE tickets (
                          description TEXT NOT NULL,
                          status VARCHAR(30) NOT NULL DEFAULT 'OPEN',
                          priority VARCHAR(20) NOT NULL DEFAULT 'MEDIUM',
-                         created_by BIGINT NOT NULL REFERENCES users(id),
-                         assigned_to BIGINT REFERENCES users(id),
+                         created_by BIGINT NOT NULL ,
+                         assigned_to BIGINT ,
                          created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
                          updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
 

@@ -81,5 +81,51 @@ public class UserService {
         userRepository.save(user);
     }
 
+
+    @Transactional
+    public User registerUserByAdmin(
+            String username,
+            String email,
+            String displayName,
+            String rawPassword,
+            String role) {
+
+        // Only an authenticated Admin can create users through this method.
+        var authentication =
+                org.springframework.security.core.context.SecurityContextHolder
+                        .getContext().getAuthentication();
+
+        boolean isAdmin = authentication != null
+                && authentication.isAuthenticated()
+                && authentication.getAuthorities().stream()
+                .anyMatch(authority ->
+                        authority.getAuthority().equals("ROLE_ADMIN")
+                                || authority.getAuthority().equals("ADMIN"));
+
+        if (!isAdmin) {
+            throw new org.springframework.security.access.AccessDeniedException(
+                    "Only administrators can create users with assigned roles.");
+        }
+
+        if (role == null) {
+            throw new IllegalArgumentException("Please select a role.");
+        }
+
+        role = role.trim().toUpperCase(java.util.Locale.ROOT);
+
+        if (!java.util.Set.of(
+                "USER", "SUPPORT", "MAINTENANCE", "ADMIN"
+        ).contains(role)) {
+            throw new IllegalArgumentException("Invalid user role.");
+        }
+
+        User user = registerUser(
+                username, email, displayName, rawPassword);
+
+        user.setRole(role);
+
+        return userRepository.save(user);
+    }
+
 }
 

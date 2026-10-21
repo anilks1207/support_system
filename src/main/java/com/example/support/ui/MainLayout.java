@@ -19,6 +19,7 @@ import jakarta.annotation.security.PermitAll;
 
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.example.support.inventory.StockInventoryView;
+import com.example.support.user.UserManagementView;
 
 @PermitAll
 public class MainLayout extends AppLayout implements RouterLayout {
@@ -178,6 +179,17 @@ public class MainLayout extends AppLayout implements RouterLayout {
                             "Support Dashboard",
                             SupportDashboardView.class,
                             VaadinIcon.DASHBOARD.create()
+                    )
+            );
+        }
+
+        // User Management: Admin only
+        if (isAdmin) {
+            navigation.addItem(
+                    new SideNavItem(
+                            "User Management",
+                            UserManagementView.class,
+                            VaadinIcon.USERS.create()
                     )
             );
         }
