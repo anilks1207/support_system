@@ -25,6 +25,3 @@ EXPOSE 8080
 
 # Explicitly pass the active profile and override the JDBC URL straight into the runtime variables
 ENTRYPOINT ["sh", "-c", "java -Dspring.profiles.active=supabase -Dspring.datasource.url=\"$SPRING_DATASOURCE_URL\" -Dserver.port=${PORT:-8080} -jar app.jar"]
-git add Dockerfile
-git commit -m "Pass datasource url parameter dynamically in Docker entrypoint"
-git push
